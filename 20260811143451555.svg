@@ -1,0 +1,411 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 980" width="980" height="980">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', 'SimHei', sans-serif; }
+  </style>
+  <defs>
+    <marker id="arw" markerWidth="9" markerHeight="7" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect width="980" height="980" fill="#ffffff"/>
+  <text x="40" y="46" font-size="22" font-weight="700" fill="#111827">集合通信原语 · Collective Primitives</text>
+  <text x="40" y="70" font-size="13" fill="#6b7280">4 张卡 = 4 个 GPU (R0–R3)。左=通信前，右=通信后。K=单份数据大小，N=卡数；右下角为每张卡收发的通讯量（环形实现，大 N 渐近）</text>
+  <rect x="40" y="96" width="440" height="195" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" data-graph-role="container"/>
+  <text x="60" y="126" font-size="16" font-weight="600" fill="#111827">Broadcast</text>
+  <text x="462" y="125" font-size="11" fill="#3b82f6" text-anchor="end" font-weight="600" letter-spacing="0.03em">参数/权重下发</text>
+  <line x1="60" y1="138" x2="462" y2="138" stroke="#f0f0f0" stroke-width="1"/>
+    <text x="144.5" y="148" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信前</text>
+    <text x="344.5" y="148" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信后</text>
+    <text x="102" y="167" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R0</text>
+    <rect x="110" y="154" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="128" y="154" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="146" y="154" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="164" y="154" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <text x="102" y="189" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R1</text>
+    <rect x="110" y="176" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="128" y="176" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="146" y="176" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="164" y="176" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="102" y="211" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R2</text>
+    <rect x="110" y="198" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="128" y="198" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="146" y="198" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="164" y="198" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="102" y="233" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R3</text>
+    <rect x="110" y="220" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="128" y="220" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="146" y="220" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="164" y="220" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="310" y="154" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="328" y="154" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="346" y="154" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="364" y="154" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="310" y="176" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="328" y="176" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="346" y="176" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="364" y="176" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="310" y="198" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="328" y="198" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="346" y="198" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="364" y="198" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="310" y="220" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="328" y="220" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="346" y="220" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="364" y="220" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <line x1="201" y1="194.0" x2="286" y2="194.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arw)"/>
+  <text x="60" y="275" font-size="11.5" fill="#6b7280">根节点的一份数据复制到所有 GPU</text>
+  <text x="462" y="275" font-size="11" fill="#9ca3af" text-anchor="end">通讯量/卡 &#8776; K</text>
+  <rect x="500" y="96" width="440" height="195" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" data-graph-role="container"/>
+  <text x="520" y="126" font-size="16" font-weight="600" fill="#111827">Scatter</text>
+  <text x="922" y="125" font-size="11" fill="#3b82f6" text-anchor="end" font-weight="600" letter-spacing="0.03em">数据切分分发</text>
+  <line x1="520" y1="138" x2="922" y2="138" stroke="#f0f0f0" stroke-width="1"/>
+    <text x="604.5" y="148" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信前</text>
+    <text x="804.5" y="148" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信后</text>
+    <text x="562" y="167" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R0</text>
+    <rect x="570" y="154" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="588" y="154" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="606" y="154" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="624" y="154" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <text x="562" y="189" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R1</text>
+    <rect x="570" y="176" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="588" y="176" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="606" y="176" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="624" y="176" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="562" y="211" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R2</text>
+    <rect x="570" y="198" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="588" y="198" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="606" y="198" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="624" y="198" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="562" y="233" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R3</text>
+    <rect x="570" y="220" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="588" y="220" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="606" y="220" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="624" y="220" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="770" y="154" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="788" y="154" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="806" y="154" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="824" y="154" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="770" y="176" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="788" y="176" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="806" y="176" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="824" y="176" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="770" y="198" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="788" y="198" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="806" y="198" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="824" y="198" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="770" y="220" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="788" y="220" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="806" y="220" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="824" y="220" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <line x1="661" y1="194.0" x2="746" y2="194.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arw)"/>
+  <text x="520" y="275" font-size="11.5" fill="#6b7280">把一份数据切成 4 块，各 GPU 拿一块</text>
+  <text x="922" y="275" font-size="11" fill="#9ca3af" text-anchor="end">通讯量/卡 &#8776; K/N</text>
+  <rect x="40" y="311" width="440" height="195" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" data-graph-role="container"/>
+  <text x="60" y="341" font-size="16" font-weight="600" fill="#111827">Gather</text>
+  <text x="462" y="340" font-size="11" fill="#3b82f6" text-anchor="end" font-weight="600" letter-spacing="0.03em">结果回收</text>
+  <line x1="60" y1="353" x2="462" y2="353" stroke="#f0f0f0" stroke-width="1"/>
+    <text x="144.5" y="363" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信前</text>
+    <text x="344.5" y="363" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信后</text>
+    <text x="102" y="382" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R0</text>
+    <rect x="110" y="369" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="128" y="369" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="146" y="369" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="164" y="369" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="102" y="404" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R1</text>
+    <rect x="110" y="391" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="128" y="391" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="146" y="391" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="164" y="391" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="102" y="426" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R2</text>
+    <rect x="110" y="413" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="128" y="413" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="146" y="413" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="164" y="413" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="102" y="448" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R3</text>
+    <rect x="110" y="435" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="128" y="435" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="146" y="435" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="164" y="435" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="310" y="369" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="328" y="369" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="346" y="369" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="364" y="369" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="310" y="391" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="328" y="391" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="346" y="391" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="364" y="391" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="310" y="413" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="328" y="413" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="346" y="413" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="364" y="413" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="310" y="435" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="328" y="435" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="346" y="435" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="364" y="435" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <line x1="201" y1="409.0" x2="286" y2="409.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arw)"/>
+  <text x="60" y="490" font-size="11.5" fill="#6b7280">各 GPU 的块汇聚到根节点（Scatter 逆操作）</text>
+  <text x="462" y="490" font-size="11" fill="#9ca3af" text-anchor="end">通讯量/卡 &#8776; K/N</text>
+  <rect x="500" y="311" width="440" height="195" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" data-graph-role="container"/>
+  <text x="520" y="341" font-size="16" font-weight="600" fill="#111827">Reduce</text>
+  <text x="922" y="340" font-size="11" fill="#3b82f6" text-anchor="end" font-weight="600" letter-spacing="0.03em">梯度求和到根</text>
+  <line x1="520" y1="353" x2="922" y2="353" stroke="#f0f0f0" stroke-width="1"/>
+    <text x="604.5" y="363" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信前</text>
+    <text x="804.5" y="363" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信后</text>
+    <text x="562" y="382" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R0</text>
+    <rect x="570" y="369" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="588" y="369" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="606" y="369" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="624" y="369" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <text x="562" y="404" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R1</text>
+    <rect x="570" y="391" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="588" y="391" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="606" y="391" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="624" y="391" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <text x="562" y="426" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R2</text>
+    <rect x="570" y="413" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="588" y="413" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="606" y="413" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="624" y="413" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <text x="562" y="448" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R3</text>
+    <rect x="570" y="435" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="588" y="435" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="606" y="435" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="624" y="435" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="770" y="369" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="777.5" y="380.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="788" y="369" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="795.5" y="380.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="806" y="369" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="813.5" y="380.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="824" y="369" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="831.5" y="380.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="770" y="391" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="788" y="391" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="806" y="391" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="824" y="391" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="770" y="413" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="788" y="413" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="806" y="413" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="824" y="413" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="770" y="435" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="788" y="435" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="806" y="435" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="824" y="435" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <line x1="661" y1="409.0" x2="746" y2="409.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arw)"/>
+  <text x="520" y="490" font-size="11.5" fill="#6b7280">各 GPU 数据按元素求和(&#931;)，结果只在根节点</text>
+  <text x="922" y="490" font-size="11" fill="#9ca3af" text-anchor="end">通讯量/卡 &#8776; K</text>
+  <rect x="40" y="526" width="440" height="195" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" data-graph-role="container"/>
+  <text x="60" y="556" font-size="16" font-weight="600" fill="#111827">AllReduce &#9733;</text>
+  <text x="462" y="555" font-size="11" fill="#3b82f6" text-anchor="end" font-weight="600" letter-spacing="0.03em">DP 梯度同步</text>
+  <line x1="60" y1="568" x2="462" y2="568" stroke="#f0f0f0" stroke-width="1"/>
+    <text x="144.5" y="578" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信前</text>
+    <text x="344.5" y="578" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信后</text>
+    <text x="102" y="597" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R0</text>
+    <rect x="110" y="584" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="128" y="584" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="146" y="584" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="164" y="584" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <text x="102" y="619" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R1</text>
+    <rect x="110" y="606" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="128" y="606" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="146" y="606" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="164" y="606" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <text x="102" y="641" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R2</text>
+    <rect x="110" y="628" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="128" y="628" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="146" y="628" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="164" y="628" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <text x="102" y="663" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R3</text>
+    <rect x="110" y="650" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="128" y="650" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="146" y="650" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="164" y="650" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="310" y="584" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="317.5" y="595.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="328" y="584" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="335.5" y="595.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="346" y="584" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="353.5" y="595.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="364" y="584" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="371.5" y="595.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="310" y="606" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="317.5" y="617.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="328" y="606" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="335.5" y="617.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="346" y="606" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="353.5" y="617.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="364" y="606" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="371.5" y="617.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="310" y="628" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="317.5" y="639.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="328" y="628" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="335.5" y="639.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="346" y="628" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="353.5" y="639.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="364" y="628" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="371.5" y="639.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="310" y="650" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="317.5" y="661.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="328" y="650" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="335.5" y="661.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="346" y="650" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="353.5" y="661.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="364" y="650" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="371.5" y="661.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <line x1="201" y1="624.0" x2="286" y2="624.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arw)"/>
+  <text x="60" y="705" font-size="11.5" fill="#6b7280">= Reduce + Broadcast，所有 GPU 都拿到求和结果</text>
+  <text x="462" y="705" font-size="11" fill="#9ca3af" text-anchor="end">通讯量/卡 &#8776; 2K</text>
+  <rect x="500" y="526" width="440" height="195" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" data-graph-role="container"/>
+  <text x="520" y="556" font-size="16" font-weight="600" fill="#111827">AllGather &#9733;</text>
+  <text x="922" y="555" font-size="11" fill="#3b82f6" text-anchor="end" font-weight="600" letter-spacing="0.03em">ZeRO 收参 / TP</text>
+  <line x1="520" y1="568" x2="922" y2="568" stroke="#f0f0f0" stroke-width="1"/>
+    <text x="604.5" y="578" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信前</text>
+    <text x="804.5" y="578" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信后</text>
+    <text x="562" y="597" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R0</text>
+    <rect x="570" y="584" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="588" y="584" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="606" y="584" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="624" y="584" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="562" y="619" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R1</text>
+    <rect x="570" y="606" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="588" y="606" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="606" y="606" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="624" y="606" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="562" y="641" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R2</text>
+    <rect x="570" y="628" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="588" y="628" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="606" y="628" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="624" y="628" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="562" y="663" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R3</text>
+    <rect x="570" y="650" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="588" y="650" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="606" y="650" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="624" y="650" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="770" y="584" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="788" y="584" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="806" y="584" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="824" y="584" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="770" y="606" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="788" y="606" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="806" y="606" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="824" y="606" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="770" y="628" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="788" y="628" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="806" y="628" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="824" y="628" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="770" y="650" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="788" y="650" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="806" y="650" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="824" y="650" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <line x1="661" y1="624.0" x2="746" y2="624.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arw)"/>
+  <text x="520" y="705" font-size="11.5" fill="#6b7280">= Gather + Broadcast，每 GPU 都拿到完整拼接</text>
+  <text x="922" y="705" font-size="11" fill="#9ca3af" text-anchor="end">通讯量/卡 &#8776; K</text>
+  <rect x="40" y="741" width="440" height="195" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" data-graph-role="container"/>
+  <text x="60" y="771" font-size="16" font-weight="600" fill="#111827">ReduceScatter &#9733;</text>
+  <text x="462" y="770" font-size="11" fill="#3b82f6" text-anchor="end" font-weight="600" letter-spacing="0.03em">ZeRO 梯度切分</text>
+  <line x1="60" y1="783" x2="462" y2="783" stroke="#f0f0f0" stroke-width="1"/>
+    <text x="144.5" y="793" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信前</text>
+    <text x="344.5" y="793" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信后</text>
+    <text x="102" y="812" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R0</text>
+    <rect x="110" y="799" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="128" y="799" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="146" y="799" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="164" y="799" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <text x="102" y="834" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R1</text>
+    <rect x="110" y="821" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="128" y="821" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="146" y="821" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="164" y="821" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <text x="102" y="856" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R2</text>
+    <rect x="110" y="843" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="128" y="843" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="146" y="843" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="164" y="843" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <text x="102" y="878" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R3</text>
+    <rect x="110" y="865" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="128" y="865" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="146" y="865" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="164" y="865" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="310" y="799" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="317.5" y="810.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="328" y="799" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="346" y="799" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="364" y="799" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="310" y="821" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="328" y="821" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="335.5" y="832.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="346" y="821" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="364" y="821" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="310" y="843" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="328" y="843" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="346" y="843" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="353.5" y="854.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <rect x="364" y="843" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="310" y="865" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="328" y="865" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="346" y="865" width="15" height="15" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+    <rect x="364" y="865" width="15" height="15" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+    <text x="371.5" y="876.5" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">&#931;</text>
+    <line x1="201" y1="839.0" x2="286" y2="839.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arw)"/>
+  <text x="60" y="920" font-size="11.5" fill="#6b7280">先按元素求和，再把结果块切分给各 GPU</text>
+  <text x="462" y="920" font-size="11" fill="#9ca3af" text-anchor="end">通讯量/卡 &#8776; K</text>
+  <rect x="500" y="741" width="440" height="195" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" data-graph-role="container"/>
+  <text x="520" y="771" font-size="16" font-weight="600" fill="#111827">All-to-All</text>
+  <text x="922" y="770" font-size="11" fill="#3b82f6" text-anchor="end" font-weight="600" letter-spacing="0.03em">EP / MoE 路由</text>
+  <line x1="520" y1="783" x2="922" y2="783" stroke="#f0f0f0" stroke-width="1"/>
+    <text x="604.5" y="793" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信前</text>
+    <text x="804.5" y="793" font-size="10" fill="#9ca3af" text-anchor="middle" letter-spacing="0.03em">通信后</text>
+    <text x="562" y="812" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R0</text>
+    <rect x="570" y="799" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="588" y="799" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="606" y="799" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="624" y="799" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <text x="562" y="834" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R1</text>
+    <rect x="570" y="821" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="588" y="821" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="606" y="821" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="624" y="821" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <text x="562" y="856" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R2</text>
+    <rect x="570" y="843" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="588" y="843" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="606" y="843" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="624" y="843" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <text x="562" y="878" font-size="10" fill="#9ca3af" text-anchor="end" font-weight="500">R3</text>
+    <rect x="570" y="865" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="588" y="865" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="606" y="865" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="624" y="865" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="770" y="799" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="788" y="799" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="806" y="799" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="824" y="799" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="770" y="821" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="788" y="821" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="806" y="821" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="824" y="821" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="770" y="843" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="788" y="843" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="806" y="843" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="824" y="843" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <rect x="770" y="865" width="15" height="15" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <rect x="788" y="865" width="15" height="15" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+    <rect x="806" y="865" width="15" height="15" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="824" y="865" width="15" height="15" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <line x1="661" y1="839.0" x2="746" y2="839.0" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arw)"/>
+  <text x="520" y="920" font-size="11.5" fill="#6b7280">每 GPU 把第 j 块发给 R j：矩阵转置式重排</text>
+  <text x="922" y="920" font-size="11" fill="#9ca3af" text-anchor="end">通讯量/卡 &#8776; K</text>
+  <line x1="40" y1="928" x2="940" y2="928" stroke="#f0f0f0" stroke-width="1"/>
+  <rect x="40" y="938" width="14" height="14" rx="2" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+  <text x="60" y="950" font-size="12" fill="#374151">R0 数据</text>
+  <rect x="140" y="938" width="14" height="14" rx="2" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+  <text x="160" y="950" font-size="12" fill="#374151">R1</text>
+  <rect x="216" y="938" width="14" height="14" rx="2" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/>
+  <text x="236" y="950" font-size="12" fill="#374151">R2</text>
+  <rect x="292" y="938" width="14" height="14" rx="2" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="312" y="950" font-size="12" fill="#374151">R3</text>
+  <rect x="368" y="938" width="14" height="14" rx="2" fill="#374151" stroke="#374151" stroke-width="1"/>
+  <text x="388" y="950" font-size="12" fill="#374151">&#931; 求和结果</text>
+  <rect x="468" y="938" width="14" height="14" rx="2" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="488" y="950" font-size="12" fill="#374151">空/无数据</text>
+  <text x="940" y="950" font-size="11" fill="#9ca3af" text-anchor="end">&#9733; = LLM 训练最常用</text>
+</svg>
